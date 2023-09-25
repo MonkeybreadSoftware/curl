@@ -21,6 +21,9 @@ blablabla
 
 # Client-side
 <client>
+<features>
+Mime
+</features>
 <server>
 http
 </server>
@@ -53,7 +56,7 @@ POST /we/want/%TESTNUMBER HTTP/1.1
 Host: %HOSTIP:%HTTPPORT
 User-Agent: curl/%VERSION
 Accept: */*
-Content-Length: 360
+Content-Length: 378
 Content-Type: multipart/form-data; boundary=----------------------------5dbea401cd8c
 
 ------------------------------5dbea401cd8c

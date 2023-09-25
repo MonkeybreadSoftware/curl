@@ -19,6 +19,9 @@ silly content
 #
 # Client-side
 <client>
+<features>
+proxy
+</features>
 <server>
 ftp
 socks5
@@ -27,7 +30,7 @@ socks5
 FTP fetch with --proxy set to socks5://
  </name>
  <command>
-ftp://%HOSTIP:%FTPPORT/%TESTNUMBER --proxy socks5://%HOSTIP:%SOCKSPORT 
+ftp://%HOSTIP:%FTPPORT/%TESTNUMBER --proxy socks5://%HOSTIP:%SOCKSPORT
 </command>
 </client>
 
