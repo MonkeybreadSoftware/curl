@@ -59,8 +59,7 @@ static int recv_pong(CURL *curl, const char *expected_payload)
   const struct curl_ws_frame *meta;
   char buffer[256];
   CURLcode result = curl_ws_recv(curl, buffer, sizeof(buffer), &rlen, &meta);
-  while(result == CURLE_AGAIN)
-  {
+  while(result == CURLE_AGAIN) {
     Curl_wait_ms(1);
     result = curl_ws_recv(curl, buffer, sizeof(buffer), &rlen, &meta);
   }
