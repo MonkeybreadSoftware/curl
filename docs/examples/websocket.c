@@ -46,12 +46,23 @@ static int ping(CURL *curl, const char *send_payload)
   return (int)result;
 }
 
+/* we use internal this function from the CURL library to implement the delay
+   Your application may be event based and thus uses a timer to regularly check,
+   maybe using Select() to see which sockets have data waiting to be processed */
+
+typedef curl_off_t timediff_t;
+int Curl_wait_ms(timediff_t timeout_ms);
+
 static int recv_pong(CURL *curl, const char *expected_payload)
 {
   size_t rlen;
   const struct curl_ws_frame *meta;
   char buffer[256];
   CURLcode result = curl_ws_recv(curl, buffer, sizeof(buffer), &rlen, &meta);
+  while(result == CURLE_AGAIN) {
+    Curl_wait_ms(1);
+    result = curl_ws_recv(curl, buffer, sizeof(buffer), &rlen, &meta);
+  }
   if(!result) {
     if(meta->flags & CURLWS_PONG) {
       int same = 0;
